@@ -1,5 +1,9 @@
+function toDate(value: string): Date {
+  return value.includes('T') ? new Date(value) : new Date(`${value}T00:00:00`)
+}
+
 export function formatDate(isoDate: string, opts?: Intl.DateTimeFormatOptions): string {
-  return new Date(`${isoDate}T00:00:00`).toLocaleDateString(
+  return toDate(isoDate).toLocaleDateString(
     'en-GB',
     opts ?? {
       weekday: 'short',
@@ -11,7 +15,7 @@ export function formatDate(isoDate: string, opts?: Intl.DateTimeFormatOptions): 
 }
 
 export function formatShortDate(isoDate: string): string {
-  return new Date(`${isoDate}T00:00:00`).toLocaleDateString('en-GB', {
+  return toDate(isoDate).toLocaleDateString('en-GB', {
     day: '2-digit',
     month: 'short',
   })

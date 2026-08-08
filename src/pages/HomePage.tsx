@@ -29,7 +29,7 @@ import {
 import { ConstructorShareDonut, DriverPointsBarChart } from '@/components/charts'
 import { DriverStandingsTable } from '@/components/standings'
 import { RaceCard, RaceResultsTable } from '@/components/races'
-import { SITE, fullName, isRaceCompleted, teamColor } from '@/utils'
+import { SITE, isRaceCompleted } from '@/utils'
 
 const container = {
   hidden: {},
@@ -50,9 +50,9 @@ export function HomePage() {
   const completedRaces = races.filter(isRaceCompleted)
   const upcomingRaces = races.filter((race) => !isRaceCompleted(race))
   const lastRace = completedRaces[completedRaces.length - 1]
-  const lastRound = lastRace?.round
+  const lastSessionKey = lastRace?.sessionKey
 
-  const lastRaceResults = useRaceResults(lastRound ?? '', Boolean(lastRound))
+  const lastRaceResults = useRaceResults(lastSessionKey ?? 0, Boolean(lastSessionKey))
 
   const driverList = driverStandings.data?.standings ?? []
   const constructorList = constructorStandings.data?.standings ?? []
@@ -113,8 +113,8 @@ export function HomePage() {
               {leader ? (
                 <StatCard
                   label="Championship Leader"
-                  value={fullName(leader.Driver.givenName, leader.Driver.familyName)}
-                  hint={`${leader.Constructors[0]?.name} · ${leader.wins} wins`}
+                  value={leader.fullName}
+                  hint={`${leader.teamName} · ${leader.wins} wins`}
                   icon={Crown}
                 />
               ) : null}
@@ -151,7 +151,7 @@ export function HomePage() {
               {constructorLeader ? (
                 <StatCard
                   label="Constructors Leader"
-                  value={constructorLeader.Constructor.name}
+                  value={constructorLeader.teamName}
                   hint={`${constructorLeader.wins} wins`}
                   icon={Flag}
                 />
@@ -170,7 +170,7 @@ export function HomePage() {
               <StatCard
                 label="Race Progress"
                 value={`${completedRaces.length} / ${races.length}`}
-                hint={seasonRound ? `Through round ${seasonRound}` : '2026 season'}
+                hint={seasonRound ? `Through round ${seasonRound}` : `${seasonYear ?? new Date().getFullYear()} season`}
                 icon={Flag}
               />
             </QueryBoundary>
@@ -229,14 +229,14 @@ export function HomePage() {
                 <div className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1.5">
                   {constructorList.map((standing) => (
                     <span
-                      key={standing.Constructor.constructorId}
+                      key={standing.teamName}
                       className="flex items-center gap-1.5 text-xs text-muted-foreground"
                     >
                       <span
                         className="size-2.5 rounded-full"
-                        style={{ backgroundColor: teamColor(standing.Constructor.constructorId) }}
+                        style={{ backgroundColor: standing.teamColour }}
                       />
-                      {standing.Constructor.name}
+                      {standing.teamName}
                     </span>
                   ))}
                 </div>
@@ -271,7 +271,7 @@ export function HomePage() {
                     </p>
                   </div>
                   <Button variant="outline" size="sm" asChild>
-                    <Link to={`/races/${lastRaceResults.data.race.round}`}>
+                    <Link to={`/races/${lastRaceResults.data.race.sessionKey}`}>
                       Details
                       <ChevronRight className="size-4" />
                     </Link>

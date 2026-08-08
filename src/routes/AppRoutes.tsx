@@ -37,7 +37,7 @@ export function AppRoutes() {
               <Route index element={<HomePage />} />
               <Route path="standings" element={<StandingsPage />} />
               <Route path="races" element={<RacesPage />} />
-              <Route path="races/:round" element={<RaceDetailPage />} />
+              <Route path="races/:sessionKey" element={<RaceDetailPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

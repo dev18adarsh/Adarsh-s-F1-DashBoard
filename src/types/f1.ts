@@ -1,130 +1,67 @@
-export interface Driver {
-  driverId: string
-  permanentNumber: string
-  code: string
-  url: string
-  givenName: string
-  familyName: string
-  dateOfBirth: string
-  nationality: string
-}
-
-export interface Constructor {
-  constructorId: string
-  url: string
-  name: string
-  nationality: string
-}
-
-export interface Location {
-  lat: string
-  long: string
-  locality: string
-  country: string
-}
-
-export interface Circuit {
-  circuitId: string
-  url: string
-  circuitName: string
-  Location: Location
-}
-
-export interface Session {
-  date: string
-  time: string
-}
-
 export interface Race {
-  season: string
-  round: string
-  url: string
+  round: number
+  meetingKey: number
+  sessionKey: number
   raceName: string
-  Circuit: Circuit
+  officialName: string
+  circuitName: string
+  location: string
+  country: string
+  countryCode: string
+  countryFlag?: string | null
   date: string
-  time: string
-  Sprint?: Session
-  FirstPractice?: Session
-  SecondPractice?: Session
-  ThirdPractice?: Session
-  Qualifying?: Session
-  Results?: RaceResult[]
+  dateEnd: string
+  hasSprint: boolean
 }
 
 export interface DriverStanding {
-  position: string
-  positionText: string
-  points: string
-  wins: string
-  Driver: Driver
-  Constructors: Constructor[]
+  position: number
+  points: number
+  wins: number
+  driverNumber: number
+  fullName: string
+  firstName: string
+  lastName: string
+  acronym: string
+  headshotUrl?: string | null
+  teamName: string
+  teamColour: string
 }
 
 export interface ConstructorStanding {
-  position: string
-  positionText: string
-  points: string
-  wins: string
-  Constructor: Constructor
+  position: number
+  points: number
+  wins: number
+  teamName: string
+  teamColour: string
 }
 
-export interface ResultTime {
-  millis: string
-  time: string
-}
-
-export interface FastestLap {
-  rank: string
-  lap: string
-  Time: { time: string }
-  AverageSpeed: { units: string; speed: string }
-}
+export type RaceResultStatus = 'Finished' | 'DNF' | 'DNS' | 'DSQ'
 
 export interface RaceResult {
-  number: string
-  position: string
-  positionText: string
-  points: string
-  Driver: Driver
-  Constructor: Constructor
-  grid: string
-  laps: string
-  status: string
-  Time?: ResultTime
-  FastestLap?: FastestLap
+  position: number | null
+  driverNumber: number
+  fullName: string
+  firstName: string
+  lastName: string
+  acronym: string
+  headshotUrl?: string | null
+  teamName: string
+  teamColour: string
+  grid?: number
+  laps: number
+  points: number
+  status: RaceResultStatus
+  gapToLeader: number | string | null
 }
 
-export interface MRData<T> {
-  xmlns: string
-  series: string
-  url: string
-  limit: string
-  offset: string
-  total: string
-  payload: T
-}
-
-export interface RaceTablePayload {
-  season: string
-  round: string
-  Races: Race[]
-}
-
-export interface StandingsList {
-  season: string
-  round: string
-  DriverStandings?: DriverStanding[]
-  ConstructorStandings?: ConstructorStanding[]
-}
-
-export interface StandingsTablePayload {
-  season: string
-  round: string
-  StandingsLists: StandingsList[]
+export interface RaceResultData {
+  race: Race
+  results: RaceResult[]
 }
 
 export interface StandingsResponse<T> {
-  season: string
-  round: string
+  season: number
+  round: number
   standings: T[]
 }

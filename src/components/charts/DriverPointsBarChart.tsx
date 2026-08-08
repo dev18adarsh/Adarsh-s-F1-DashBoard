@@ -2,7 +2,6 @@ import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 
 
 import { useChartColors } from '@/hooks'
 import type { DriverStanding } from '@/types'
-import { fullName, teamColor } from '@/utils'
 
 interface DriverPointsBarChartProps {
   standings: DriverStanding[]
@@ -13,7 +12,7 @@ interface ChartDatum {
   name: string
   shortName: string
   points: number
-  constructorId: string
+  colour: string
 }
 
 export function DriverPointsBarChart({ standings, limit = 10 }: DriverPointsBarChartProps) {
@@ -22,10 +21,10 @@ export function DriverPointsBarChart({ standings, limit = 10 }: DriverPointsBarC
   const data: ChartDatum[] = standings
     .slice(0, limit)
     .map((standing) => ({
-      name: fullName(standing.Driver.givenName, standing.Driver.familyName),
-      shortName: `${standing.Driver.familyName}`,
-      points: Number(standing.points),
-      constructorId: standing.Constructors[0]?.constructorId ?? 'unknown',
+      name: standing.fullName,
+      shortName: standing.lastName,
+      points: standing.points,
+      colour: standing.teamColour,
     }))
     .sort((a, b) => b.points - a.points)
 
@@ -56,7 +55,7 @@ export function DriverPointsBarChart({ standings, limit = 10 }: DriverPointsBarC
         />
         <Bar dataKey="points" radius={[0, 6, 6, 0]} barSize={22}>
           {data.map((datum) => (
-            <Cell key={datum.name} fill={teamColor(datum.constructorId)} />
+            <Cell key={datum.name} fill={datum.colour} />
           ))}
         </Bar>
       </BarChart>

@@ -9,6 +9,7 @@ import { isRaceCompleted } from '@/utils'
 
 export function RacesPage() {
   const schedule = useRaceSchedule()
+  const year = new Date().getFullYear()
 
   const { completed, upcoming } = useMemo(() => {
     const races = schedule.data ?? []
@@ -17,8 +18,6 @@ export function RacesPage() {
       upcoming: races.filter((race) => !isRaceCompleted(race)),
     }
   }, [schedule.data])
-
-  const season = schedule.data?.[0]?.season
 
   const skeleton = (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -32,7 +31,7 @@ export function RacesPage() {
     <div className="flex flex-col gap-8">
       <PageHeader
         title="Race Schedule"
-        subtitle={season ? `${season} Formula One calendar` : 'Formula One calendar'}
+        subtitle={`${year} Formula One calendar`}
       />
 
       <QueryBoundary

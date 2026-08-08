@@ -18,7 +18,9 @@ export function StandingsPage() {
         title="Championship Standings"
         subtitle={
           season
-            ? `${season} season · up to date through round ${round}`
+            ? (round ?? 0) > 0
+              ? `${season} season · up to date through round ${round}`
+              : `${season} season`
             : `${new Date().getFullYear()} season`
         }
       />

@@ -2,8 +2,8 @@ export const STALE_TIME = 1000 * 60 * 5
 
 export const f1Keys = {
   all: ['f1'] as const,
-  schedule: () => [...f1Keys.all, 'schedule'] as const,
-  driverStandings: () => [...f1Keys.all, 'driver-standings'] as const,
-  constructorStandings: () => [...f1Keys.all, 'constructor-standings'] as const,
-  raceResults: (round: string) => [...f1Keys.all, 'race-results', round] as const,
+  schedule: (year: number) => [...f1Keys.all, 'schedule', year] as const,
+  driverStandings: (year: number) => [...f1Keys.all, 'driver-standings', year] as const,
+  constructorStandings: (year: number) => [...f1Keys.all, 'constructor-standings', year] as const,
+  raceResults: (sessionKey: number) => [...f1Keys.all, 'race-results', sessionKey] as const,
 }

@@ -2,7 +2,6 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 
 import { useChartColors } from '@/hooks'
 import type { ConstructorStanding } from '@/types'
-import { teamColor } from '@/utils'
 
 interface ConstructorShareDonutProps {
   standings: ConstructorStanding[]
@@ -12,9 +11,9 @@ export function ConstructorShareDonut({ standings }: ConstructorShareDonutProps)
   const colors = useChartColors()
 
   const data = standings.map((standing) => ({
-    name: standing.Constructor.name,
-    value: Number(standing.points),
-    constructorId: standing.Constructor.constructorId,
+    name: standing.teamName,
+    value: standing.points,
+    colour: standing.teamColour,
   }))
 
   return (
@@ -32,7 +31,7 @@ export function ConstructorShareDonut({ standings }: ConstructorShareDonutProps)
           stroke="none"
         >
           {data.map((entry) => (
-            <Cell key={entry.name} fill={teamColor(entry.constructorId)} />
+            <Cell key={entry.name} fill={entry.colour} />
           ))}
         </Pie>
         <Tooltip

@@ -6,17 +6,18 @@ import { useRaceResults } from '@/hooks'
 import { Badge, Button, Card, CardContent, EmptyState } from '@/components/ui'
 import { PageHeader, QueryBoundary, TableSkeleton } from '@/components/shared'
 import { RaceResultsTable } from '@/components/races'
-import { formatDate, fullName, isRaceCompleted, teamColor } from '@/utils'
+import { formatDate, isRaceCompleted } from '@/utils'
 
 export function RaceDetailPage() {
-  const { round } = useParams<{ round: string }>()
+  const { sessionKey } = useParams<{ sessionKey: string }>()
+  const key = Number(sessionKey)
 
-  const results = useRaceResults(round ?? '', Boolean(round))
+  const results = useRaceResults(key, Number.isFinite(key) && key > 0)
 
   const race = results.data?.race
   const raceResults = results.data?.results ?? []
   const completed = race ? isRaceCompleted(race) : false
-  const podium = raceResults.filter((result) => ['1', '2', '3'].includes(result.position))
+  const podium = raceResults.filter((result) => result.position != null && result.position <= 3)
 
   return (
     <div className="flex flex-col gap-8">
@@ -38,7 +39,9 @@ export function RaceDetailPage() {
           <>
             <PageHeader
               title={race.raceName}
-              subtitle={`Round ${race.round} · ${race.Circuit.circuitName}`}
+              subtitle={
+                race.round > 0 ? `Round ${race.round} · ${race.circuitName}` : race.circuitName
+              }
               action={
                 <Badge variant={completed ? 'outline' : 'default'} className="w-fit">
                   {completed ? 'Completed' : 'Upcoming'}
@@ -58,7 +61,7 @@ export function RaceDetailPage() {
                   <div className="leading-tight">
                     <p className="text-xs font-medium text-muted-foreground uppercase">Location</p>
                     <p className="font-semibold">
-                      {race.Circuit.Location.locality}, {race.Circuit.Location.country}
+                      {race.location}, {race.country}
                     </p>
                   </div>
                 </CardContent>
@@ -77,7 +80,7 @@ export function RaceDetailPage() {
                   <Flag className="size-5 text-primary" />
                   <div className="leading-tight">
                     <p className="text-xs font-medium text-muted-foreground uppercase">Sprint</p>
-                    <p className="font-semibold">{race.Sprint ? 'Yes' : 'No'}</p>
+                    <p className="font-semibold">{race.hasSprint ? 'Yes' : 'No'}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -94,7 +97,7 @@ export function RaceDetailPage() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                     {podium.map((result, index) => (
                       <Card
-                        key={`${result.Driver.driverId}-${result.position}`}
+                        key={`${result.driverNumber}-${result.position}`}
                         className={index === 0 ? 'border-primary/60' : ''}
                       >
                         <CardContent className="flex items-center gap-3 py-5">
@@ -102,17 +105,13 @@ export function RaceDetailPage() {
                             {result.position}
                           </span>
                           <div className="min-w-0 leading-tight">
-                            <p className="truncate font-semibold">
-                              {fullName(result.Driver.givenName, result.Driver.familyName)}
-                            </p>
+                            <p className="truncate font-semibold">{result.fullName}</p>
                             <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
                               <span
                                 className="inline-block size-2 rounded-full"
-                                style={{
-                                  backgroundColor: teamColor(result.Constructor.constructorId),
-                                }}
+                                style={{ backgroundColor: result.teamColour }}
                               />
-                              {result.Constructor.name}
+                              {result.teamName}
                             </p>
                           </div>
                         </CardContent>
