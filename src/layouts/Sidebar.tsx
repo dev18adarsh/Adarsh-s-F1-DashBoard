@@ -2,9 +2,7 @@ import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Flag } from 'lucide-react'
 
-import { SITE } from '@/config/site'
-import { NAV_ITEMS, type SidebarItem } from '@/config/nav'
-import { cn } from '@/lib/utils'
+import { NAV_ITEMS, SITE, cn, type SidebarItem } from '@/utils'
 
 interface SidebarProps {
   items?: SidebarItem[]

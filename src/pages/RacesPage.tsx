@@ -1,14 +1,11 @@
 import { useMemo } from 'react'
 import { CalendarDays, Flag } from 'lucide-react'
 
-import { useRaceSchedule } from '@/api/hooks'
-import { PageHeader } from '@/components/shared/PageHeader'
-import { QueryBoundary } from '@/components/shared/QueryBoundary'
-import { RaceCardSkeleton } from '@/components/shared/skeletons'
-import { EmptyState } from '@/components/ui/empty-state'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { RaceCard } from '@/components/races/RaceCard'
-import { isRaceCompleted } from '@/lib/races'
+import { useRaceSchedule } from '@/hooks'
+import { EmptyState, Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui'
+import { PageHeader, QueryBoundary, RaceCardSkeleton } from '@/components/shared'
+import { RaceCard } from '@/components/races'
+import { isRaceCompleted } from '@/utils'
 
 export function RacesPage() {
   const schedule = useRaceSchedule()

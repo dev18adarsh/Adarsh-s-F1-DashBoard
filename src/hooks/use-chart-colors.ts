@@ -1,4 +1,4 @@
-import { useThemeStore } from '@/stores/theme-store'
+import { useThemeStore } from '@/store'
 
 export interface ChartColors {
   grid: string

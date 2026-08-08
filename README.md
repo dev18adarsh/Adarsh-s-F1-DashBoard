@@ -33,20 +33,26 @@ npm run format    # Prettier (with tailwindcss plugin)
 
 ```
 src/
-├── api/                 # Axios client, typed fetchers, TanStack Query hooks
+├── api/                 # Axios HTTP client
 ├── components/
 │   ├── ui/              # shadcn/ui primitives (button, card, tabs, sheet, ...)
-│   ├── layout/          # App shell: sticky header, mobile nav, footer
 │   ├── shared/          # ErrorBoundary, QueryBoundary, skeletons, StatCard
 │   ├── charts/          # Recharts components
 │   ├── standings/       # Standings tables
 │   └── races/           # Race cards + results tables
-├── config/              # Site metadata, F1 team colors
-├── hooks/               # Reusable hooks (chart theme colors)
-├── lib/                 # cn(), formatting helpers, domain utils
+├── hooks/               # TanStack Query hooks + shared custom hooks
+├── layouts/             # App shell: AppLayout, Navbar, Sidebar
 ├── pages/               # Route pages (lazy loaded)
-└── stores/              # Zustand stores (theme)
+├── routes/              # AppRoutes (router setup, route-level code splitting)
+├── services/            # F1 data layer (Jolpica API fetchers)
+├── store/               # Zustand stores (theme)
+├── styles/              # Global styles + design tokens (globals.css)
+├── types/               # Shared TypeScript types (F1 domain)
+└── utils/               # cn(), formatting helpers, domain utils, site config
 ```
+
+Each folder exposes a barrel `index.ts`; pages are intentionally imported
+directly to preserve route-level code splitting.
 
 ## Features
 

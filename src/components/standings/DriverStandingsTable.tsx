@@ -1,16 +1,16 @@
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
 import {
+  Avatar,
+  AvatarFallback,
+  Badge,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { teamColor } from '@/config/teams'
-import { fullName, initials } from '@/lib/format'
-import type { DriverStanding } from '@/api/types'
+} from '@/components/ui'
+import type { DriverStanding } from '@/types'
+import { fullName, initials, teamColor } from '@/utils'
 
 interface DriverStandingsTableProps {
   standings: DriverStanding[]

@@ -1,9 +1,8 @@
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
-import { teamColor } from '@/config/teams'
-import { fullName } from '@/lib/format'
-import { useChartColors } from '@/hooks/use-chart-colors'
-import type { DriverStanding } from '@/api/types'
+import { useChartColors } from '@/hooks'
+import type { DriverStanding } from '@/types'
+import { fullName, teamColor } from '@/utils'
 
 interface DriverPointsBarChartProps {
   standings: DriverStanding[]

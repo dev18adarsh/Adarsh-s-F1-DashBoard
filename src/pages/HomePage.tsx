@@ -7,29 +7,29 @@ import {
   useDriverStandings,
   useRaceResults,
   useRaceSchedule,
-} from '@/api/hooks'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ChartContainer } from '@/components/ui/chart-container'
-import { EmptyState } from '@/components/ui/empty-state'
-import { QueryBoundary } from '@/components/shared/QueryBoundary'
-import { StatCard } from '@/components/shared/StatCard'
+} from '@/hooks'
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  ChartContainer,
+  EmptyState,
+} from '@/components/ui'
 import {
   ChartSkeleton,
+  QueryBoundary,
   RaceCardSkeleton,
+  StatCard,
   StatCardSkeleton,
   TableSkeleton,
-} from '@/components/shared/skeletons'
-import { DriverPointsBarChart } from '@/components/charts/DriverPointsBarChart'
-import { ConstructorShareDonut } from '@/components/charts/ConstructorShareDonut'
-import { DriverStandingsTable } from '@/components/standings/DriverStandingsTable'
-import { RaceCard } from '@/components/races/RaceCard'
-import { RaceResultsTable } from '@/components/races/RaceResultsTable'
-import { SITE } from '@/config/site'
-import { teamColor } from '@/config/teams'
-import { fullName } from '@/lib/format'
-import { isRaceCompleted } from '@/lib/races'
+} from '@/components/shared'
+import { ConstructorShareDonut, DriverPointsBarChart } from '@/components/charts'
+import { DriverStandingsTable } from '@/components/standings'
+import { RaceCard, RaceResultsTable } from '@/components/races'
+import { SITE, fullName, isRaceCompleted, teamColor } from '@/utils'
 
 const container = {
   hidden: {},

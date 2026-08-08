@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui'
 
 interface StatCardProps {
   label: string

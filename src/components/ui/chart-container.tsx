@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 
 interface ChartContainerProps extends React.ComponentProps<typeof Card> {
   title: string

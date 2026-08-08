@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { ErrorState } from '@/components/ui/error-state'
+import { ErrorState } from '@/components/ui'
 
 interface QueryBoundaryProps {
   isLoading: boolean

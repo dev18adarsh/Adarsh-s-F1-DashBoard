@@ -2,18 +2,11 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, CalendarDays, Flag, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-import { useRaceResults } from '@/api/hooks'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { EmptyState } from '@/components/ui/empty-state'
-import { PageHeader } from '@/components/shared/PageHeader'
-import { QueryBoundary } from '@/components/shared/QueryBoundary'
-import { TableSkeleton } from '@/components/shared/skeletons'
-import { RaceResultsTable } from '@/components/races/RaceResultsTable'
-import { fullName, formatDate } from '@/lib/format'
-import { isRaceCompleted } from '@/lib/races'
-import { teamColor } from '@/config/teams'
+import { useRaceResults } from '@/hooks'
+import { Badge, Button, Card, CardContent, EmptyState } from '@/components/ui'
+import { PageHeader, QueryBoundary, TableSkeleton } from '@/components/shared'
+import { RaceResultsTable } from '@/components/races'
+import { formatDate, fullName, isRaceCompleted, teamColor } from '@/utils'
 
 export function RaceDetailPage() {
   const { round } = useParams<{ round: string }>()

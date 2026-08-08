@@ -1,12 +1,9 @@
 import { motion } from 'framer-motion'
 
-import { useConstructorStandings, useDriverStandings } from '@/api/hooks'
-import { PageHeader } from '@/components/shared/PageHeader'
-import { QueryBoundary } from '@/components/shared/QueryBoundary'
-import { TableSkeleton } from '@/components/shared/skeletons'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { DriverStandingsTable } from '@/components/standings/DriverStandingsTable'
-import { ConstructorStandingsTable } from '@/components/standings/ConstructorStandingsTable'
+import { useConstructorStandings, useDriverStandings } from '@/hooks'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui'
+import { PageHeader, QueryBoundary, TableSkeleton } from '@/components/shared'
+import { ConstructorStandingsTable, DriverStandingsTable } from '@/components/standings'
 
 export function StandingsPage() {
   const driverStandings = useDriverStandings()

@@ -1,4 +1,4 @@
-import { apiClient } from './client'
+import { apiClient } from '@/api'
 import type {
   ConstructorStanding,
   DriverStanding,
@@ -6,8 +6,9 @@ import type {
   Race,
   RaceResult,
   RaceTablePayload,
+  StandingsResponse,
   StandingsTablePayload,
-} from './types'
+} from '@/types'
 
 async function getPayload<T>(url: string): Promise<T> {
   const { data } = await apiClient.get<MRData<T>>(url)
@@ -17,12 +18,6 @@ async function getPayload<T>(url: string): Promise<T> {
 export async function fetchRaceSchedule(): Promise<Race[]> {
   const payload = await getPayload<RaceTablePayload>('/current.json')
   return payload.Races
-}
-
-export interface StandingsResponse<T> {
-  season: string
-  round: string
-  standings: T[]
 }
 
 export async function fetchDriverStandings(): Promise<StandingsResponse<DriverStanding>> {

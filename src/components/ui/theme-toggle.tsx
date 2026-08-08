@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { useThemeStore } from '@/stores/theme-store'
-import { cn } from '@/lib/utils'
+import { useThemeStore } from '@/store'
+import { cn } from '@/utils'
 
 interface ThemeToggleProps {
   className?: string

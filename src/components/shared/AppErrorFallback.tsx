@@ -1,4 +1,4 @@
-import { ErrorState } from '@/components/ui/error-state'
+import { ErrorState } from '@/components/ui'
 
 interface AppErrorFallbackProps {
   error: Error

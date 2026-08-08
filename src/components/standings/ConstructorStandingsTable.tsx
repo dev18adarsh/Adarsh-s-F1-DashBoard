@@ -1,13 +1,6 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { teamColor } from '@/config/teams'
-import type { ConstructorStanding } from '@/api/types'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui'
+import type { ConstructorStanding } from '@/types'
+import { teamColor } from '@/utils'
 
 interface ConstructorStandingsTableProps {
   standings: ConstructorStanding[]

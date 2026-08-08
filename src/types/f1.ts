@@ -122,3 +122,9 @@ export interface StandingsTablePayload {
   round: string
   StandingsLists: StandingsList[]
 }
+
+export interface StandingsResponse<T> {
+  season: string
+  round: string
+  standings: T[]
+}

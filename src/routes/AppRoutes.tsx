@@ -1,9 +1,8 @@
 import { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 
-import { AppLayout } from '@/components/layout/AppLayout'
-import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
-import { PageLoader } from '@/components/shared/PageLoader'
+import { AppLayout } from '@/layouts'
+import { ErrorBoundary, PageLoader } from '@/components/shared'
 
 const HomePage = lazy(() => import('@/pages/HomePage').then((m) => ({ default: m.HomePage })))
 const StandingsPage = lazy(() =>
@@ -27,7 +26,7 @@ function ScrollToTop() {
   return null
 }
 
-export default function App() {
+export function AppRoutes() {
   return (
     <BrowserRouter>
       <ScrollToTop />

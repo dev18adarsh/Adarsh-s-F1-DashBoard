@@ -1,18 +1,17 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { SITE } from '@/config/site'
-import { NAV_ITEMS } from '@/config/nav'
+import { NAV_ITEMS, SITE } from '@/utils'
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@/components/ui/sheet'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { Navbar } from '@/components/layout/navbar'
-import { Sidebar } from '@/components/layout/sidebar'
+  ThemeToggle,
+} from '@/components/ui'
+import { Navbar } from './Navbar'
+import { Sidebar } from './Sidebar'
 
 function AmbientBackground() {
   return (

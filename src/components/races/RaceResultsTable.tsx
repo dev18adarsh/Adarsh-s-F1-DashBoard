@@ -1,16 +1,14 @@
-import { Badge } from '@/components/ui/badge'
 import {
+  Badge,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { teamColor } from '@/config/teams'
-import { fullName } from '@/lib/format'
-import { cn } from '@/lib/utils'
-import type { RaceResult } from '@/api/types'
+} from '@/components/ui'
+import type { RaceResult } from '@/types'
+import { cn, fullName, teamColor } from '@/utils'
 
 interface RaceResultsTableProps {
   results: RaceResult[]

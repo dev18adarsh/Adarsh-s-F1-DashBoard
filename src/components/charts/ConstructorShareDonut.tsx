@@ -1,8 +1,8 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 
-import { teamColor } from '@/config/teams'
-import { useChartColors } from '@/hooks/use-chart-colors'
-import type { ConstructorStanding } from '@/api/types'
+import { useChartColors } from '@/hooks'
+import type { ConstructorStanding } from '@/types'
+import { teamColor } from '@/utils'
 
 interface ConstructorShareDonutProps {
   standings: ConstructorStanding[]

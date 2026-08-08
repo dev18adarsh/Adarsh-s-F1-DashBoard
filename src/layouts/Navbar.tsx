@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Flag, Menu } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import { SearchBar } from '@/components/ui/search-bar'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { Button, SearchBar, ThemeToggle } from '@/components/ui'
 
 interface NavbarProps {
   onOpenMobileNav: () => void

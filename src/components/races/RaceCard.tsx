@@ -2,12 +2,9 @@ import { Link } from 'react-router-dom'
 import { CalendarDays, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { formatDate } from '@/lib/format'
-import { isRaceCompleted } from '@/lib/races'
-import { cn } from '@/lib/utils'
-import type { Race } from '@/api/types'
+import { Badge, Card, CardContent } from '@/components/ui'
+import type { Race } from '@/types'
+import { cn, formatDate, isRaceCompleted } from '@/utils'
 
 interface RaceCardProps {
   race: Race
