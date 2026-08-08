@@ -11,6 +11,8 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ChartContainer } from '@/components/ui/chart-container'
+import { EmptyState } from '@/components/ui/empty-state'
 import { QueryBoundary } from '@/components/shared/QueryBoundary'
 import { StatCard } from '@/components/shared/StatCard'
 import {
@@ -70,11 +72,13 @@ export function HomePage() {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center gap-4 pt-6 pb-2 text-center sm:pt-10"
         >
-          <Badge variant="outline" className="gap-2 rounded-full px-3 py-1">
+          <Badge variant="outline" className="gap-2 rounded-full px-3 py-1 shadow-soft">
             <Gauge className="size-3.5 text-primary" />
             {seasonYear ? `${seasonYear} Season Live` : 'Live Data'}
           </Badge>
-          <h1 className="text-4xl font-black tracking-tight sm:text-6xl">{SITE.name}</h1>
+          <h1 className="text-gradient-red text-4xl font-black tracking-tight sm:text-6xl">
+            {SITE.name}
+          </h1>
           <p className="max-w-xl text-base text-muted-foreground sm:text-lg">{SITE.tagline}</p>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
             <Button asChild>
@@ -190,17 +194,13 @@ export function HomePage() {
             skeleton={<ChartSkeleton />}
           >
             {driverList.length > 0 ? (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Championship Points</CardTitle>
-                  <p className="text-sm text-muted-foreground">
-                    Top {Math.min(10, driverList.length)} drivers by points
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <DriverPointsBarChart standings={driverList} />
-                </CardContent>
-              </Card>
+              <ChartContainer
+                title="Championship Points"
+                description={`Top ${Math.min(10, driverList.length)} drivers by points`}
+                height={320}
+              >
+                <DriverPointsBarChart standings={driverList} />
+              </ChartContainer>
             ) : null}
           </QueryBoundary>
         </motion.div>
@@ -220,31 +220,27 @@ export function HomePage() {
             skeleton={<ChartSkeleton height={320} />}
           >
             {constructorList.length > 0 ? (
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle>Constructors' Points Share</CardTitle>
-                  <p className="text-sm text-muted-foreground">
-                    Distribution of total constructor points
-                  </p>
-                </CardHeader>
-                <CardContent className="flex flex-col items-center gap-4">
-                  <ConstructorShareDonut standings={constructorList} />
-                  <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5">
-                    {constructorList.map((standing) => (
+              <ChartContainer
+                title="Constructors' Points Share"
+                description="Distribution of total constructor points"
+                height={280}
+              >
+                <ConstructorShareDonut standings={constructorList} />
+                <div className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1.5">
+                  {constructorList.map((standing) => (
+                    <span
+                      key={standing.Constructor.constructorId}
+                      className="flex items-center gap-1.5 text-xs text-muted-foreground"
+                    >
                       <span
-                        key={standing.Constructor.constructorId}
-                        className="flex items-center gap-1.5 text-xs text-muted-foreground"
-                      >
-                        <span
-                          className="size-2.5 rounded-full"
-                          style={{ backgroundColor: teamColor(standing.Constructor.constructorId) }}
-                        />
-                        {standing.Constructor.name}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                        className="size-2.5 rounded-full"
+                        style={{ backgroundColor: teamColor(standing.Constructor.constructorId) }}
+                      />
+                      {standing.Constructor.name}
+                    </span>
+                  ))}
+                </div>
+              </ChartContainer>
             ) : null}
           </QueryBoundary>
         </motion.div>
@@ -287,12 +283,12 @@ export function HomePage() {
               </Card>
             ) : (
               <Card>
-                <CardContent className="flex flex-col items-center gap-2 py-10 text-center">
-                  <Flag className="size-8 text-muted-foreground" />
-                  <p className="font-semibold">No race results yet</p>
-                  <p className="text-sm text-muted-foreground">
-                    The first race of the season hasn't been run yet.
-                  </p>
+                <CardContent className="p-0">
+                  <EmptyState
+                    icon={Flag}
+                    title="No race results yet"
+                    description="The first race of the season hasn't been run yet."
+                  />
                 </CardContent>
               </Card>
             )}
@@ -369,10 +365,12 @@ export function HomePage() {
             </div>
           ) : (
             <Card>
-              <CardContent className="flex flex-col items-center gap-2 py-10 text-center">
-                <CalendarDays className="size-8 text-muted-foreground" />
-                <p className="font-semibold">Season complete</p>
-                <p className="text-sm text-muted-foreground">Check back next season!</p>
+              <CardContent className="p-0">
+                <EmptyState
+                  icon={CalendarDays}
+                  title="Season complete"
+                  description="Check back next season!"
+                />
               </CardContent>
             </Card>
           )}

@@ -1,9 +1,11 @@
 import { useMemo } from 'react'
+import { CalendarDays, Flag } from 'lucide-react'
 
 import { useRaceSchedule } from '@/api/hooks'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { QueryBoundary } from '@/components/shared/QueryBoundary'
 import { RaceCardSkeleton } from '@/components/shared/skeletons'
+import { EmptyState } from '@/components/ui/empty-state'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { RaceCard } from '@/components/races/RaceCard'
 import { isRaceCompleted } from '@/lib/races'
@@ -57,9 +59,11 @@ export function RacesPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-sm text-muted-foreground">
-                No upcoming races — the season is complete.
-              </p>
+              <EmptyState
+                icon={CalendarDays}
+                title="No upcoming races"
+                description="The season is complete — check back next year."
+              />
             )}
           </TabsContent>
 
@@ -71,9 +75,11 @@ export function RacesPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-sm text-muted-foreground">
-                No completed races yet this season.
-              </p>
+              <EmptyState
+                icon={Flag}
+                title="No completed races yet"
+                description="Race results will appear here as the season progresses."
+              />
             )}
           </TabsContent>
         </Tabs>

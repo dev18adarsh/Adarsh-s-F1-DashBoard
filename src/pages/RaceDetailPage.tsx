@@ -6,6 +6,7 @@ import { useRaceResults } from '@/api/hooks'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { EmptyState } from '@/components/ui/empty-state'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { QueryBoundary } from '@/components/shared/QueryBoundary'
 import { TableSkeleton } from '@/components/shared/skeletons'
@@ -135,12 +136,12 @@ export function RaceDetailPage() {
               </motion.section>
             ) : (
               <Card>
-                <CardContent className="flex flex-col items-center gap-2 py-12 text-center">
-                  <CalendarDays className="size-8 text-muted-foreground" />
-                  <p className="font-semibold">This race hasn't happened yet</p>
-                  <p className="text-sm text-muted-foreground">
-                    Results will appear here after {race.raceName} is completed.
-                  </p>
+                <CardContent className="p-0">
+                  <EmptyState
+                    icon={CalendarDays}
+                    title="This race hasn't happened yet"
+                    description={`Results will appear here after ${race.raceName} is completed.`}
+                  />
                 </CardContent>
               </Card>
             )}

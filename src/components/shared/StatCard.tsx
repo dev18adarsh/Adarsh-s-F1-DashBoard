@@ -12,18 +12,31 @@ interface StatCardProps {
 }
 
 export function StatCard({ label, value, hint, icon: Icon, accent }: StatCardProps) {
+  const color = accent ?? '#e10600'
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.3 }}
+      className="h-full"
     >
-      <Card>
+      <Card className="h-full">
+        <div
+          className="pointer-events-none absolute -top-14 -right-14 size-32 rounded-full opacity-20 blur-2xl"
+          style={{ backgroundColor: color }}
+          aria-hidden="true"
+        />
         <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">{label}</CardTitle>
           <div
-            className="flex size-9 items-center justify-center rounded-lg"
-            style={{ backgroundColor: accent ? `${accent}22` : undefined, color: accent }}
+            className="flex size-10 items-center justify-center rounded-xl shadow-soft"
+            style={{
+              backgroundColor: `${color}1f`,
+              color,
+              boxShadow: `0 8px 24px -8px ${color}55`,
+            }}
           >
             <Icon className="size-4" />
           </div>
