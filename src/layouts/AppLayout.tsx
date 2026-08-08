@@ -16,9 +16,9 @@ import { Sidebar } from './Sidebar'
 function AmbientBackground() {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <div className="absolute -top-44 left-1/4 size-[520px] animate-pulse-glow rounded-full bg-primary/15 blur-[120px]" />
-      <div className="absolute right-[-8rem] bottom-[-10rem] size-[480px] animate-pulse-glow rounded-full bg-primary/10 blur-[120px] [animation-delay:2s]" />
-      <div className="absolute top-1/3 -left-28 size-80 rounded-full bg-primary/5 blur-[100px]" />
+      <div className="absolute -top-44 left-1/4 size-[280px] animate-none rounded-full bg-primary/15 blur-[80px] sm:size-[520px] sm:animate-pulse-glow sm:blur-[120px]" />
+      <div className="absolute right-[-8rem] bottom-[-10rem] size-[260px] animate-none rounded-full bg-primary/10 blur-[80px] sm:size-[480px] sm:animate-pulse-glow sm:blur-[120px] sm:[animation-delay:2s]" />
+      <div className="absolute top-1/3 -left-28 size-44 rounded-full bg-primary/5 blur-[60px] sm:size-80 sm:blur-[100px]" />
     </div>
   )
 }
@@ -52,6 +52,13 @@ export function AppLayout() {
 
   return (
     <div className="relative isolate flex min-h-dvh">
+      <a
+        href="#main-content"
+        className="sr-only z-50 rounded-md bg-primary px-4 py-2 font-semibold text-primary-foreground focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+      >
+        Skip to content
+      </a>
+
       <AmbientBackground />
 
       <Sidebar className="hidden w-64 shrink-0 lg:sticky lg:top-0 lg:flex lg:h-dvh lg:flex-col lg:border-r lg:border-border/60 lg:bg-card/40 lg:py-5 lg:backdrop-blur-xl" />
@@ -59,7 +66,11 @@ export function AppLayout() {
       <div className="flex min-w-0 flex-1 flex-col">
         <Navbar onOpenMobileNav={() => setMobileNavOpen(true)} />
 
-        <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 outline-none sm:px-6"
+        >
           <Outlet />
         </main>
 

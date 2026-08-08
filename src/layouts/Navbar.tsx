@@ -14,7 +14,7 @@ export function Navbar({ onOpenMobileNav }: NavbarProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="rounded-full lg:hidden"
+          className="size-10 rounded-full lg:hidden"
           onClick={onOpenMobileNav}
           aria-label="Open menu"
         >

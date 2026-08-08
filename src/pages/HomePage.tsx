@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { CalendarDays, ChevronRight, Crown, Flag, Gauge, Trophy } from 'lucide-react'
+import { CalendarDays, ChevronRight, Crown, Flag, Trophy } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 import {
@@ -73,10 +73,13 @@ export function HomePage() {
           className="flex flex-col items-center gap-4 pt-6 pb-2 text-center sm:pt-10"
         >
           <Badge variant="outline" className="gap-2 rounded-full px-3 py-1 shadow-soft">
-            <Gauge className="size-3.5 text-primary" />
+            <span className="relative flex size-2" aria-hidden="true">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-teal" />
+            </span>
             {seasonYear ? `${seasonYear} Season Live` : 'Live Data'}
           </Badge>
-          <h1 className="text-gradient-red text-4xl font-black tracking-tight sm:text-6xl">
+          <h1 className="text-gradient-red text-3xl font-black tracking-tight sm:text-5xl lg:text-6xl">
             {SITE.name}
           </h1>
           <p className="max-w-xl text-base text-muted-foreground sm:text-lg">{SITE.tagline}</p>
@@ -135,6 +138,7 @@ export function HomePage() {
                   value={`${leader.points} pts`}
                   hint={`${seasonYear ?? ''} Drivers' Championship`}
                   icon={Trophy}
+                  accent="#00d4c7"
                 />
               ) : null}
             </QueryBoundary>
@@ -170,8 +174,13 @@ export function HomePage() {
               <StatCard
                 label="Race Progress"
                 value={`${completedRaces.length} / ${races.length}`}
-                hint={seasonRound ? `Through round ${seasonRound}` : `${seasonYear ?? new Date().getFullYear()} season`}
+                hint={
+                  seasonRound
+                    ? `Through round ${seasonRound}`
+                    : `${seasonYear ?? new Date().getFullYear()} season`
+                }
                 icon={Flag}
+                accent="#00d4c7"
               />
             </QueryBoundary>
           </motion.div>

@@ -30,9 +30,13 @@
   --input: oklch(0.9 0.006 90);
   --ring: #e10600;
 
+  --teal: #00d4c7;
+  --teal-strong: #0f766e;
+  --teal-soft: rgb(0 212 199 / 0.12);
+
   --chart-1: #e10600;
   --chart-2: #3671c6;
-  --chart-3: #27f4d2;
+  --chart-3: #00d4c7;
   --chart-4: #ff8000;
   --chart-5: #52e252;
 
@@ -65,9 +69,13 @@
   --input: rgb(255 255 255 / 0.1);
   --ring: #e10600;
 
+  --teal: #00d4c7;
+  --teal-strong: #00d4c7;
+  --teal-soft: rgb(0 212 199 / 0.16);
+
   --chart-1: #ff4d4d;
   --chart-2: #3671c6;
-  --chart-3: #27f4d2;
+  --chart-3: #00d4c7;
   --chart-4: #ff8000;
   --chart-5: #52e252;
 
@@ -175,6 +183,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-teal: var(--teal);
+  --color-teal-strong: var(--teal-strong);
+  --color-teal-soft: var(--teal-soft);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -246,6 +257,7 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
     font-feature-settings: 'cv11', 'ss01', 'cv02', 'cv03';
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
@@ -280,5 +292,15 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Lighter backdrop blur on small screens keeps scrolling smooth on phones. */
+@media (max-width: 640px) {
+  .glass,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
   }
 }

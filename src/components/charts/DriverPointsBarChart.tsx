@@ -1,4 +1,6 @@
+import { memo } from 'react'
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { useReducedMotion } from 'framer-motion'
 
 import { useChartColors } from '@/hooks'
 import type { DriverStanding } from '@/types'
@@ -15,8 +17,9 @@ interface ChartDatum {
   colour: string
 }
 
-export function DriverPointsBarChart({ standings, limit = 10 }: DriverPointsBarChartProps) {
+function DriverPointsBarChartBase({ standings, limit = 10 }: DriverPointsBarChartProps) {
   const colors = useChartColors()
+  const reduceMotion = useReducedMotion()
 
   const data: ChartDatum[] = standings
     .slice(0, limit)
@@ -27,6 +30,8 @@ export function DriverPointsBarChart({ standings, limit = 10 }: DriverPointsBarC
       colour: standing.teamColour,
     }))
     .sort((a, b) => b.points - a.points)
+
+  const leaderName = data[0]?.name
 
   return (
     <ResponsiveContainer width="100%" height={320}>
@@ -53,12 +58,19 @@ export function DriverPointsBarChart({ standings, limit = 10 }: DriverPointsBarC
           labelStyle={{ fontWeight: 600 }}
           formatter={(value) => [`${value} pts`, 'Points']}
         />
-        <Bar dataKey="points" radius={[0, 6, 6, 0]} barSize={22}>
+        <Bar dataKey="points" radius={[0, 6, 6, 0]} barSize={22} isAnimationActive={!reduceMotion}>
           {data.map((datum) => (
-            <Cell key={datum.name} fill={datum.colour} />
+            <Cell
+              key={datum.name}
+              fill={datum.colour}
+              stroke={datum.name === leaderName ? colors.accent : 'none'}
+              strokeWidth={datum.name === leaderName ? 2 : 0}
+            />
           ))}
         </Bar>
       </BarChart>
     </ResponsiveContainer>
   )
 }
+
+export const DriverPointsBarChart = memo(DriverPointsBarChartBase)

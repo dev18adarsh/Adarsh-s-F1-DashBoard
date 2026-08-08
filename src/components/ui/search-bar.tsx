@@ -35,17 +35,18 @@ export function SearchBar({
 
   return (
     <div className={cn('group relative flex items-center', containerClassName)}>
-      <Search className="pointer-events-none absolute left-3.5 size-4 text-muted-foreground/70 transition-colors group-focus-within:text-primary" />
+      <Search className="pointer-events-none absolute left-3.5 size-4 text-muted-foreground/70 transition-colors group-focus-within:text-teal-strong" />
       <input
         ref={inputRef}
         type="text"
+        aria-label="Search races, drivers and teams"
         value={value}
         onChange={(event) => {
           onChange?.(event)
           onValueChange?.(event.target.value)
         }}
         className={cn(
-          'h-9 w-full rounded-full border border-input bg-card/60 pr-8 pl-9 text-sm text-foreground shadow-soft backdrop-blur-xl transition-all duration-300 outline-none placeholder:text-muted-foreground/60 hover:border-border focus:border-primary/50 focus:bg-card focus:ring-4 focus:ring-primary/10',
+          'h-9 w-full rounded-full border border-input bg-card/60 pr-8 pl-9 text-sm text-foreground shadow-soft backdrop-blur-xl transition-all duration-300 outline-none placeholder:text-muted-foreground/60 hover:border-border focus:border-teal/60 focus:bg-card focus:ring-4 focus:ring-teal/15',
           className,
         )}
         {...props}

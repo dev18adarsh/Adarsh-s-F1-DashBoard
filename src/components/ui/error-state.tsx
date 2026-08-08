@@ -20,6 +20,7 @@ export function ErrorState({
 }: ErrorStateProps) {
   return (
     <div
+      role="alert"
       className={cn(
         'flex flex-col items-center justify-center gap-4 px-6 py-12 text-center',
         className,

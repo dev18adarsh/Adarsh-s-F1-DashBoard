@@ -3,6 +3,7 @@ import { useThemeStore } from '@/store'
 export interface ChartColors {
   grid: string
   axis: string
+  accent: string
   tooltip: {
     background: string
     border: string
@@ -17,6 +18,7 @@ export function useChartColors(): ChartColors {
     return {
       grid: '#e4e4e7',
       axis: '#71717a',
+      accent: '#0f766e',
       tooltip: { background: '#ffffff', border: '#e4e4e7', text: '#18181b' },
     }
   }
@@ -24,6 +26,7 @@ export function useChartColors(): ChartColors {
   return {
     grid: 'rgba(255,255,255,0.08)',
     axis: '#a1a1aa',
+    accent: '#00d4c7',
     tooltip: { background: '#18181b', border: 'rgba(255,255,255,0.1)', text: '#fafafa' },
   }
 }

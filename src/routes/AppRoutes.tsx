@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { MotionConfig } from 'framer-motion'
 
 import { AppLayout } from '@/layouts'
 import { ErrorBoundary, PageLoader } from '@/components/shared'
@@ -31,17 +32,19 @@ export function AppRoutes() {
     <BrowserRouter>
       <ScrollToTop />
       <ErrorBoundary>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="standings" element={<StandingsPage />} />
-              <Route path="races" element={<RacesPage />} />
-              <Route path="races/:sessionKey" element={<RaceDetailPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </Suspense>
+        <MotionConfig reducedMotion="user">
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="standings" element={<StandingsPage />} />
+                <Route path="races" element={<RacesPage />} />
+                <Route path="races/:sessionKey" element={<RaceDetailPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </MotionConfig>
       </ErrorBoundary>
     </BrowserRouter>
   )
