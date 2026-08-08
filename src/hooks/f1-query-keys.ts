@@ -1,4 +1,5 @@
-export const STALE_TIME = 1000 * 60 * 5
+export const STALE_TIME = 1000 * 60 * 10
+export const GC_TIME = 1000 * 60 * 60
 
 export const f1Keys = {
   all: ['f1'] as const,
