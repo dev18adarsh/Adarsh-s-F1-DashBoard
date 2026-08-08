@@ -1,7 +1,10 @@
 import axios from 'axios'
 
+const BASE_URL =
+  import.meta.env.VITE_OPENF1_BASE_URL ?? 'https://api.openf1.org/v1'
+
 export const openf1Client = axios.create({
-  baseURL: 'https://api.openf1.org/v1',
+  baseURL: BASE_URL,
   headers: { Accept: 'application/json' },
   timeout: 15_000,
   paramsSerializer: { indexes: null },
